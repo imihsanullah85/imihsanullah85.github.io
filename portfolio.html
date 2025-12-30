@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags: These tell browsers and search engines about your website -->
+    <meta charset="UTF-8"> <!-- Character encoding for proper text display -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Makes site responsive on mobile -->
+    <meta name="description" content="Data Scientist Portfolio - Showcasing data analysis, machine learning, and statistical projects">
+    <meta name="keywords" content="Data Scientist, Machine Learning, Python, Data Analysis, Portfolio">
+    <title>Ihsan Ullah | Data Scientist Portfolio</title>
+    
+    <!-- Google Fonts: Beautiful, professional fonts for our website -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Using JetBrains Mono for a tech/data feel and Manrope for clean readability -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome: Library of icons (LinkedIn, GitHub, Email, etc.) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ==================== CSS VARIABLES ====================
+           These are reusable values we can use throughout our CSS.
+           Think of them as constants in programming. */
+        :root {
+            /* Color Palette: Professional data/tech theme */
+            --primary-blue: #0066FF;      /* Main brand color */
+            --dark-blue: #001F3F;         /* Deep, professional blue */
+            --accent-cyan: #00D9FF;       /* Bright accent for highlights */
+            --dark-bg: #0A1929;           /* Almost black background */
+            --card-bg: #132F4C;           /* Card/section background */
+            --text-primary: #FFFFFF;      /* Main text color */
+            --text-secondary: #B0BEC5;    /* Subtle text color */
+            --gradient-1: linear-gradient(135deg, #0066FF 0%, #00D9FF 100%);
+            --gradient-2: linear-gradient(135deg, #001F3F 0%, #0066FF 100%);
+            
+            /* Typography: Font families */
+            --font-heading: 'JetBrains Mono', monospace;  /* Tech-style headings */
+            --font-body: 'Manrope', sans-serif;           /* Clean body text */
+            
+            /* Spacing: Consistent spacing throughout */
+            --spacing-xs: 0.5rem;   /* 8px */
+            --spacing-sm: 1rem;     /* 16px */
+            --spacing-md: 2rem;     /* 32px */
+            --spacing-lg: 4rem;     /* 64px */
+            --spacing-xl: 6rem;     /* 96px */
+            
+            /* Transitions: Smooth animations */
+            --transition-fast: 0.3s ease;
+            --transition-slow: 0.6s ease;
+        }
+        
+        /* ==================== RESET & BASE STYLES ====================
+           Remove default browser styling and set up our foundation */
+        * {
+            margin: 0;              /* Remove default margins */
+            padding: 0;             /* Remove default padding */
+            box-sizing: border-box; /* Include padding/border in element width */
+        }
+        
+        html {
+            scroll-behavior: smooth; /* Smooth scrolling when clicking navigation links */
+            font-size: 16px;         /* Base font size */
+        }
+        
+        body {
+            font-family: var(--font-body);      /* Apply our body font */
+            background-color: var(--dark-bg);   /* Dark background */
+            color: var(--text-primary);         /* White text */
+            line-height: 1.6;                   /* Comfortable reading space between lines */
+            overflow-x: hidden;                 /* Prevent horizontal scroll */
+        }
+        
+        /* ==================== NAVIGATION BAR ====================
+           Fixed navigation that stays at top when scrolling */
+        .navbar {
+            position: fixed;                    /* Stay in place when scrolling */
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 25, 41, 0.95); /* Semi-transparent background */
+            backdrop-filter: blur(10px);        /* Blur effect for modern look */
+            padding: 1rem 0;
+            z-index: 1000;                      /* Stay above all other elements */
+            border-bottom: 1px solid rgba(0, 102, 255, 0.2); /* Subtle bottom border */
+            transition: var(--transition-fast);
+        }
+        
+        .navbar.scrolled {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Add shadow when scrolled */
+        }
+        
+        .nav-container {
+            max-width: 1200px;           /* Maximum width for large screens */
+            margin: 0 auto;              /* Center the navbar */
+            padding: 0 var(--spacing-md);
+            display: flex;               /* Flexbox for layout */
+            justify-content: space-between; /* Space between logo and menu */
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-1);    /* Gradient text effect */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;           /* Remove bullet points */
+            gap: var(--spacing-md);     /* Space between menu items */
+        }
+        
+        .nav-menu a {
+            color: var(--text-secondary);
+            text-decoration: none;      /* Remove underline */
+            font-weight: 500;
+            transition: var(--transition-fast);
+            position: relative;         /* For hover effect positioning */
+            padding: 0.5rem 0;
+        }
+        
+        /* Hover effect: Underline animation */
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;                   /* Start with no width */
+            height: 2px;
+            background: var(--accent-cyan);
+            transition: width var(--transition-fast);
+        }
+        
+        .nav-menu a:hover::after {
+            width: 100%;                /* Expand to full width on hover */
+        }
+        
+        .nav-menu a:hover {
+            color: var(--text-primary);
+        }
+        
+        /* Mobile menu toggle (hamburger icon) */
+        .menu-toggle {
+            display: none;              /* Hidden on desktop */
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* ==================== HERO SECTION ====================
+           First section visitors see - make it impactful! */
+        .hero {
+            min-height: 100vh;          /* Full viewport height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--spacing-xl) var(--spacing-md);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Animated background effect */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0, 102, 255, 0.1) 0%, transparent 70%);
+            animation: float 20s ease-in-out infinite; /* Floating animation */
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-30px, -30px) scale(1.1); }
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            text-align: center;
+            position: relative;         /* Stay above background effect */
+            z-index: 1;
+        }
+        
+        .hero-subtitle {
+            font-family: var(--font-heading);
+            color: var(--accent-cyan);
+            font-size: 1rem;
+            margin-bottom: var(--spacing-sm);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 600;
+            /* Typing animation effect */
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero-title {
+            font-family: var(--font-heading);
+            font-size: 4rem;            /* Large, attention-grabbing */
+            font-weight: 800;
+            margin-bottom: var(--spacing-sm);
+            line-height: 1.1;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease 0.2s backwards; /* Staggered animation */
+        }
+        
+        .hero-description {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-lg);
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+        
+        /* Fade in from bottom animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: var(--spacing-sm);
+            justify-content: center;
+            flex-wrap: wrap;            /* Wrap on small screens */
+            animation: fadeInUp 1s ease 0.6s backwards;
+        }
+        
+        /* Primary button style */
+        .btn-primary {
+            background: var(--gradient-1);
+            color: var(--text-primary);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: var(--transition-fast);
+            cursor: pointer;
+            font-family: var(--font-body);
+            box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);    /* Lift up on hover */
+            box-shadow: 0 6px 25px rgba(0, 102, 255, 0.5);
+        }
+        
+        /* Secondary button style */
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            padding: 1rem 2rem;
+            border: 2px solid var(--primary-blue);
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: var(--transition-fast);
+            cursor: pointer;
+            font-family: var(--font-body);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary-blue);
+            transform: translateY(-3px);
+        }
+        
+        /* ==================== SECTION STYLES ====================
+           Reusable styles for all major sections */
+        .section {
+            padding: var(--spacing-xl) var(--spacing-md);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-md);
+            text-align: center;
+            position: relative;
+            padding-bottom: var(--spacing-sm);
+        }
+        
+        /* Decorative underline under section titles */
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-1);
+            border-radius: 2px;
+        }
+        
+        .section-description {
+            text-align: center;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto var(--spacing-lg);
+            font-size: 1.1rem;
+        }
+        
+        /* ==================== ABOUT SECTION ==================== */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Two equal columns */
+            gap: var(--spacing-lg);
+            align-items: center;
+        }
+        
+        .about-text {
+            background: var(--card-bg);
+            padding: var(--spacing-lg);
+            border-radius: 16px;
+            border: 1px solid rgba(0, 102, 255, 0.2);
+        }
+        
+        .about-text h3 {
+            font-family: var(--font-heading);
+            color: var(--accent-cyan);
+            margin-bottom: var(--spacing-sm);
+            font-size: 1.5rem;
+        }
+        
+        .about-text p {
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-sm);
+            line-height: 1.8;
+        }
+        
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2x2 grid */
+            gap: var(--spacing-md);
+        }
+        
+        .stat-card {
+            background: var(--card-bg);
+            padding: var(--spacing-md);
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(0, 102, 255, 0.2);
+            transition: var(--transition-fast);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 8px 25px rgba(0, 217, 255, 0.2);
+        }
+        
+        .stat-number {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* ==================== SKILLS SECTION ==================== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+            gap: var(--spacing-md);
+        }
+        
+        .skill-category {
+            background: var(--card-bg);
+            padding: var(--spacing-lg);
+            border-radius: 16px;
+            border: 1px solid rgba(0, 102, 255, 0.2);
+            transition: var(--transition-fast);
+        }
+        
+        .skill-category:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 12px 30px rgba(0, 102, 255, 0.3);
+        }
+        
+        .skill-category i {
+            font-size: 2.5rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .skill-category h3 {
+            font-family: var(--font-heading);
+            margin-bottom: var(--spacing-sm);
+            font-size: 1.3rem;
+        }
+        
+        .skill-list {
+            list-style: none;
+        }
+        
+        .skill-list li {
+            color: var(--text-secondary);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+        }
+        
+        .skill-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .skill-list li i {
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+            color: var(--accent-cyan);
+        }
+        
+        /* ==================== PROJECTS SECTION ==================== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--spacing-md);
+        }
+        
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 102, 255, 0.2);
+            transition: var(--transition-fast);
+            cursor: pointer;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 102, 255, 0.4);
+        }
+        
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: var(--gradient-2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-image i {
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Overlay effect on hover */
+        .project-image::after {
+            content: 'View Details';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 102, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            opacity: 0;
+            transition: var(--transition-fast);
+        }
+        
+        .project-card:hover .project-image::after {
+            opacity: 1;
+        }
+        
+        .project-content {
+            padding: var(--spacing-md);
+        }
+        
+        .project-title {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            margin-bottom: var(--spacing-xs);
+            color: var(--accent-cyan);
+        }
+        
+        .project-description {
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-sm);
+            font-size: 0.95rem;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .tag {
+            background: rgba(0, 102, 255, 0.2);
+            color: var(--accent-cyan);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+        
+        .project-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: var(--transition-fast);
+        }
+        
+        .project-link:hover {
+            color: var(--primary-blue);
+            transform: translateX(3px);
+        }
+        
+        /* ==================== EDUCATION SECTION ==================== */
+        .education-timeline {
+            position: relative;
+            padding-left: var(--spacing-lg);
+        }
+        
+        /* Vertical line for timeline */
+        .education-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: var(--gradient-1);
+        }
+        
+        .education-item {
+            position: relative;
+            margin-bottom: var(--spacing-lg);
+            background: var(--card-bg);
+            padding: var(--spacing-md);
+            border-radius: 12px;
+            border: 1px solid rgba(0, 102, 255, 0.2);
+            transition: var(--transition-fast);
+        }
+        
+        .education-item:hover {
+            transform: translateX(10px);
+            border-color: var(--accent-cyan);
+        }
+        
+        /* Timeline dot */
+        .education-item::before {
+            content: '';
+            position: absolute;
+            left: calc(-1 * var(--spacing-lg) - 6px);
+            top: var(--spacing-md);
+            width: 14px;
+            height: 14px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            border: 3px solid var(--dark-bg);
+            box-shadow: 0 0 0 3px var(--primary-blue);
+        }
+        
+        .education-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: var(--spacing-sm);
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+        }
+        
+        .education-title {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+        }
+        
+        .education-institution {
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+        
+        .education-date {
+            background: rgba(0, 102, 255, 0.2);
+            color: var(--accent-cyan);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .education-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        
+        /* ==================== CONTACT SECTION ==================== */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-lg);
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+        }
+        
+        .contact-item {
+            background: var(--card-bg);
+            padding: var(--spacing-md);
+            border-radius: 12px;
+            border: 1px solid rgba(0, 102, 255, 0.2);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            transition: var(--transition-fast);
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .contact-item:hover {
+            transform: translateX(10px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 5px 20px rgba(0, 217, 255, 0.2);
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .contact-details h3 {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .contact-details p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .contact-form {
+            background: var(--card-bg);
+            padding: var(--spacing-lg);
+            border-radius: 16px;
+            border: 1px solid rgba(0, 102, 255, 0.2);
+        }
+        
+        .form-group {
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: var(--dark-bg);
+            border: 1px solid rgba(0, 102, 255, 0.3);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: var(--transition-fast);
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.1);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        /* ==================== FOOTER ==================== */
+        footer {
+            background: var(--dark-blue);
+            padding: var(--spacing-lg) var(--spacing-md);
+            text-align: center;
+            border-top: 1px solid rgba(0, 102, 255, 0.2);
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background: var(--card-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: var(--transition-fast);
+            border: 1px solid rgba(0, 102, 255, 0.2);
+        }
+        
+        .social-link:hover {
+            background: var(--gradient-1);
+            transform: translateY(-5px) rotate(360deg);
+            box-shadow: 0 5px 20px rgba(0, 102, 255, 0.4);
+        }
+        
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* ==================== RESPONSIVE DESIGN ====================
+           Make the website look good on mobile devices */
+        
+        /* Tablets and smaller (max-width: 768px) */
+        @media (max-width: 768px) {
+            /* Show mobile menu toggle */
+            .menu-toggle {
+                display: block;
+            }
+            
+            /* Hide navigation menu by default on mobile */
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;         /* Hidden off-screen */
+                width: 100%;
+                background: rgba(10, 25, 41, 0.98);
+                flex-direction: column;
+                padding: var(--spacing-md);
+                transition: left var(--transition-fast);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            }
+            
+            /* Show menu when active */
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            /* Smaller hero title on mobile */
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-description {
+                font-size: 1rem;
+            }
+            
+            /* Stack sections vertically on mobile */
+            .about-content,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Reduce spacing on mobile */
+            .section {
+                padding: var(--spacing-lg) var(--spacing-sm);
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            /* Smaller stat cards on mobile */
+            .about-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Timeline adjustments for mobile */
+            .education-timeline {
+                padding-left: var(--spacing-md);
+            }
+            
+            .education-item::before {
+                left: calc(-1 * var(--spacing-md) - 6px);
+            }
+        }
+        
+        /* Small phones (max-width: 480px) */
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* ==================== UTILITY CLASSES ==================== */
+        .text-gradient {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .highlight {
+            color: var(--accent-cyan);
+        }
+    </style>
+</head>
+<body>
+    <!-- ==================== NAVIGATION BAR ====================
+         Fixed navigation at the top of the page -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <!-- Logo/Name -->
+            <div class="logo">&lt;Ihsan Ullah&gt;</div>
+            
+            <!-- Navigation Menu -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            
+            <!-- Mobile Menu Toggle Button (Hamburger Icon) -->
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- ==================== HERO SECTION ====================
+         First impression - your name and title -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <!-- Small text above your name -->
+            <div class="hero-subtitle">Welcome to my portfolio</div>
+            
+            <!-- Your name - BIG and bold -->
+            <h1 class="hero-title">Ihsan Ullah</h1>
+            
+            <!-- Your title/role -->
+            <p class="hero-description">
+                Data Scientist | Turning Data into Actionable Insights
+            </p>
+            
+            <!-- Call-to-action buttons -->
+            <div class="hero-buttons">
+                <a href="#projects" class="btn-primary">View My Work</a>
+                <a href="#contact" class="btn-secondary">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ==================== ABOUT SECTION ====================
+         Tell recruiters about yourself -->
+    <section class="section" id="about">
+        <h2 class="section-title">About Me</h2>
+        <p class="section-description">
+            Passionate about extracting meaningful insights from complex datasets
+        </p>
+        
+        <div class="about-content">
+            <!-- Left side: About text -->
+            <div class="about-text">
+                <h3>Hi, I'm a Data Scientist Certified by Google and IBM</h3>
+                <p>
+                    I specialize in transforming raw data into actionable business insights through 
+                    advanced statistical analysis and machine learning techniques. With a strong 
+                    foundation in Python programming and a passion for solving complex problems, 
+                    I help organizations make data-driven decisions.
+                </p>
+                <p>
+                    My approach combines technical expertise with business acumen to deliver 
+                    solutions that not only work but also create tangible value. I'm constantly 
+                    learning and staying updated with the latest tools and methodologies in the 
+                    data science field.
+                </p>
+                <p>
+                    Currently seeking opportunities to contribute to innovative projects and 
+                    collaborate with teams that value data-driven innovation.
+                </p>
+            </div>
+            
+            <!-- Right side: Statistics/achievements -->
+            <div class="about-stats">
+                <div class="stat-card">
+                    <span class="stat-number">5+</span>
+                    <span class="stat-label">Completed Projects</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">3+</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">10+</span>
+                    <span class="stat-label">Technologies</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Dedication</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ==================== SKILLS SECTION ====================
+         Showcase your technical abilities -->
+    <section class="section" id="skills">
+        <h2 class="section-title">Technical Skills</h2>
+        <p class="section-description">
+            Technologies and tools I work with to solve data challenges
+        </p>
+        
+        <div class="skills-grid">
+            <!-- Programming Languages -->
+            <div class="skill-category">
+                <i class="fas fa-code"></i>
+                <h3>Programming</h3>
+                <ul class="skill-list">
+                    <li><i class="fas fa-check"></i> Python</li>
+                    <li><i class="fas fa-check"></i> SQL</li>
+                    <li><i class="fas fa-check"></i> TensorFlow</li>
+                    <li><i class="fas fa-check"></i> Scikit-learn</li>
+                </ul>
+            </div>
+            
+            <!-- Data Analysis & Visualization -->
+            <div class="skill-category">
+                <i class="fas fa-chart-line"></i>
+                <h3>Data Analysis</h3>
+                <ul class="skill-list">
+                    <li><i class="fas fa-check"></i> Pandas & NumPy</li>
+                    <li><i class="fas fa-check"></i> Matplotlib & Seaborn</li>
+                    <li><i class="fas fa-check"></i> Tableau & Power BI</li>
+                    <li><i class="fas fa-check"></i> Excel (Advanced)</li>
+                </ul>
+            </div>
+            
+            <!-- Machine Learning -->
+            <div class="skill-category">
+                <i class="fas fa-brain"></i>
+                <h3>Machine Learning</h3>
+                <ul class="skill-list">
+                    <li><i class="fas fa-check"></i> Scikit-learn</li>
+                    <li><i class="fas fa-check"></i> TensorFlow & Keras</li>
+                    <li><i class="fas fa-check"></i> PyTorch</li>
+                    <li><i class="fas fa-check"></i> NLP & Computer Vision</li>
+                </ul>
+            </div>
+            
+            <!-- Statistics & Mathematics -->
+            <div class="skill-category">
+                <i class="fas fa-calculator"></i>
+                <h3>Statistics</h3>
+                <ul class="skill-list">
+                    <li><i class="fas fa-check"></i> Hypothesis Testing</li>
+                    <li><i class="fas fa-check"></i> Probability Theory</li>
+                    <li><i class="fas fa-check"></i> Regression Analysis</li>
+                    <li><i class="fas fa-check"></i> A/B Testing</li>
+                </ul>
+            </div>
+            
+            <!-- Databases & Big Data -->
+            <div class="skill-category">
+                <i class="fas fa-database"></i>
+                <h3>Databases</h3>
+                <ul class="skill-list">
+                    <li><i class="fas fa-check"></i> MySQL & PostgreSQL</li>
+                    <li><i class="fas fa-check"></i> MongoDB</li>
+                    <li><i class="fas fa-check"></i> Apache Spark</li>
+                    <li><i class="fas fa-check"></i> Data Warehousing</li>
+                </ul>
+            </div>
+            
+            <!-- Tools & Technologies -->
+            <div class="skill-category">
+                <i class="fas fa-tools"></i>
+                <h3>Tools & Tech</h3>
+                <ul class="skill-list">
+                    <li><i class="fas fa-check"></i> Jupyter Notebook</li>
+                    <li><i class="fas fa-check"></i> Git & GitHub</li>
+                    <li><i class="fas fa-check"></i> Docker</li>
+                    <li><i class="fas fa-check"></i> AWS & Azure</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ==================== PROJECTS SECTION ====================
+         Showcase your portfolio projects -->
+    <section class="section" id="projects">
+        <h2 class="section-title">Featured Projects</h2>
+        <p class="section-description">
+            Real-world applications of data science to solve business problems
+        </p>
+        
+        <div class="projects-grid">
+            <!-- Project 1: Customer Segmentation -->
+            <div class="project-card">
+                <div class="project-image">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Customer Segmentation Analysis</h3>
+                    <p class="project-description">
+                        Developed a machine learning model using K-Means clustering to segment 
+                        customers based on purchasing behavior, resulting in targeted marketing 
+                        strategies that increased conversion rates by 25%.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Scikit-learn</span>
+                        <span class="tag">Pandas</span>
+                        <span class="tag">Clustering</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">
+                            <i class="fab fa-github"></i> View Code
+                        </a>
+                        <a href="#" class="project-link">
+                            <i class="fas fa-external-link-alt"></i> Live Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 2: Sales Forecasting -->
+            <div class="project-card">
+                <div class="project-image">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Sales Forecasting Model</h3>
+                    <p class="project-description">
+                        Built a time series forecasting model using LSTM neural networks to predict 
+                        monthly sales with 92% accuracy, helping optimize inventory management and 
+                        reduce stockout situations.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">TensorFlow</span>
+                        <span class="tag">Time Series</span>
+                        <span class="tag">LSTM</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">
+                            <i class="fab fa-github"></i> View Code
+                        </a>
+                        <a href="#" class="project-link">
+                            <i class="fas fa-external-link-alt"></i> Live Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 3: Sentiment Analysis -->
+            <div class="project-card">
+                <div class="project-image">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Social Media Sentiment Analysis</h3>
+                    <p class="project-description">
+                        Created an NLP-based sentiment analysis tool to monitor brand perception 
+                        across social media platforms, processing 10,000+ posts daily to identify 
+                        trends and customer concerns in real-time.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">NLP</span>
+                        <span class="tag">BERT</span>
+                        <span class="tag">API Integration</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">
+                            <i class="fab fa-github"></i> View Code
+                        </a>
+                        <a href="#" class="project-link">
+                            <i class="fas fa-external-link-alt"></i> Live Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 4: Predictive Maintenance -->
+            <div class="project-card">
+                <div class="project-image">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Predictive Maintenance System</h3>
+                    <p class="project-description">
+                        Developed a machine learning solution to predict equipment failures using 
+                        IoT sensor data, reducing downtime by 40% and maintenance costs by $200K 
+                        annually through proactive interventions.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Random Forest</span>
+                        <span class="tag">IoT Data</span>
+                        <span class="tag">Feature Engineering</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">
+                            <i class="fab fa-github"></i> View Code
+                        </a>
+                        <a href="#" class="project-link">
+                            <i class="fas fa-external-link-alt"></i> Live Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 5: Image Classification -->
+            <div class="project-card">
+                <div class="project-image">
+                    <i class="fas fa-image"></i>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Medical Image Classification</h3>
+                    <p class="project-description">
+                        Implemented a deep learning CNN model for detecting anomalies in medical 
+                        X-ray images with 95% accuracy, supporting healthcare professionals in 
+                        early disease detection and diagnosis.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">CNN</span>
+                        <span class="tag">Computer Vision</span>
+                        <span class="tag">Healthcare</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">
+                            <i class="fab fa-github"></i> View Code
+                        </a>
+                        <a href="#" class="project-link">
+                            <i class="fas fa-external-link-alt"></i> Live Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 6: Dashboard Development -->
+            <div class="project-card">
+                <div class="project-image">
+                    <i class="fas fa-chart-pie"></i>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Business Intelligence Dashboard</h3>
+                    <p class="project-description">
+                        Designed and built an interactive Tableau dashboard that consolidated data 
+                        from multiple sources, providing executives with real-time KPIs and 
+                        actionable insights to drive strategic decisions.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Tableau</span>
+                        <span class="tag">SQL</span>
+                        <span class="tag">ETL</span>
+                        <span class="tag">Data Viz</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">
+                            <i class="fab fa-github"></i> View Code
+                        </a>
+                        <a href="#" class="project-link">
+                            <i class="fas fa-external-link-alt"></i> Live Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ==================== EDUCATION SECTION ====================
+         Show your academic background and certifications -->
+    <section class="section" id="education">
+        <h2 class="section-title">Education & Certifications</h2>
+        <p class="section-description">
+            Academic background and professional credentials
+        </p>
+        
+        <div class="education-timeline">
+            
+            <!-- Education Item 2: Bachelor's Degree -->
+            <div class="education-item">
+                <div class="education-header">
+                    <div>
+                        <h3 class="education-title">Bachelor of Science in Computer Science</h3>
+                        <p class="education-institution">University of Swabi</p>
+                    </div>
+                    <span class="education-date">2020 - 2024</span>
+                </div>
+                <p class="education-description">
+                    Strong foundation in algorithms, data structures, and software engineering. 
+                    Minor in Statistics. Relevant coursework: Database Systems, Statistical 
+                    Methods, Probability Theory, Linear Algebra.
+                    <br><strong>GPA:</strong> 3.25/4.0
+                </p>
+            </div>
+            
+            <!-- Certification 1 -->
+            <div class="education-item">
+                <div class="education-header">
+                    <div>
+                        <h3 class="education-title">Professional Data Scientist Certification</h3>
+                        <p class="education-institution">IBM Coursera</p>
+                    </div>
+                    <span class="education-date">2025</span>
+                </div>
+                <p class="education-description">
+                    Comprehensive certification covering Python, SQL, machine learning, and data 
+                    visualization. Completed 25+ hands-on projects demonstrating practical skills 
+                    in real-world scenarios.
+                </p>
+            </div>
+            
+            <!-- Certification 2 -->
+            <div class="education-item">
+                <div class="education-header">
+                    <div>
+                        <h3 class="education-title">Google Advanced Data Analytics</h3>
+                        <p class="education-institution">Google</p>
+                    </div>
+                    <span class="education-date">2024</span>
+                </div>
+                <p class="education-description">
+                    Learned advanced data analysis techniques using Google Cloud Platform tools,
+                    including BigQuery and Dataflow. Focused on large-scale data processing and
+                    real-time analytics on Coursera
+                </p>
+            </div>
+            
+            <!-- Certification 3 -->
+            <div class="education-item">
+                <div class="education-header">
+                    <div>
+                        <h3 class="education-title">Data Science & AI</h3>
+                        <p class="education-institution">GIK Institute</p>
+                    </div>
+                    <span class="education-date">2025</span>
+                </div>
+                <p class="education-description">
+                    Demonstrated proficiency in building and training deep learning models using 
+                    TensorFlow, including CNNs for computer vision and RNNs for sequence modeling.
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ==================== CONTACT SECTION ====================
+         Let recruiters reach out to you -->
+    <section class="section" id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <p class="section-description">
+            I'm always open to discussing new opportunities and collaborations
+        </p>
+        
+        <div class="contact-container">
+            <!-- Left side: Contact information -->
+            <div class="contact-info">
+                <!-- Email -->
+                <a href="mailto:your.email@example.com" class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3>Email</h3>
+                        <p>85ihsanullah@gmail.com</p>
+                    </div>
+                </a>
+                
+                <!-- LinkedIn -->
+                <a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fab fa-linkedin"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3>LinkedIn</h3>
+                        <p>linkedin.com/in/ihsantheanalyst</p>
+                    </div>
+                </a>
+                
+                <!-- GitHub -->
+                <a href="https://github.com/yourusername" target="_blank" class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3>GitHub</h3>
+                        <p>github.com/im.ihsanullah</p>
+                    </div>
+                </a>
+                
+                <!-- Location (Optional) -->
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3>Location</h3>
+                        <p>Islamabad, Pakistan</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right side: Contact form -->
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required placeholder="John Doe">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" name="email" required placeholder="john@example.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required placeholder="Tell me about your project or opportunity..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn-primary" style="width: 100%;">
+                    Send Message <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    </section>
+    
+    <!-- ==================== FOOTER ====================
+         Bottom section with social links -->
+    <footer>
+        <div class="footer-content">
+            <!-- Social media links -->
+            <div class="social-links">
+                <a href="https://github.com/yourusername" target="_blank" class="social-link">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://linkedin.com/in/yourprofile" target="_blank" class="social-link">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://twitter.com/yourhandle" target="_blank" class="social-link">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="mailto:your.email@example.com" class="social-link">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://kaggle.com/yourusername" target="_blank" class="social-link">
+                    <i class="fab fa-kaggle"></i>
+                </a>
+            </div>
+            
+            <!-- Copyright text -->
+            <p class="footer-text">
+                &copy; 2025 Ihsan Ullah. All rights reserved. | Built with passion for data science
+            </p>
+        </div>
+    </footer>
+    
+    <!-- ==================== JAVASCRIPT ====================
+         Add interactivity to the website -->
+    <script>
+        // ========== MOBILE MENU TOGGLE ==========
+        // Get the menu toggle button and navigation menu
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        // When the hamburger icon is clicked, show/hide the menu
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');  // Toggle 'active' class
+            
+            // Change icon from bars to X when menu is open
+            const icon = menuToggle.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Close mobile menu when a link is clicked
+        const navLinks = document.querySelectorAll('.nav-menu a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                const icon = menuToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+        
+        // ========== NAVBAR SCROLL EFFECT ==========
+        // Add shadow to navbar when user scrolls down
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            // If scrolled more than 100 pixels, add 'scrolled' class
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // ========== FORM SUBMISSION ==========
+        // Handle contact form submission
+        const contactForm = document.getElementById('contactForm');
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();  // Prevent default form submission (page reload)
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            // Here you would normally send the data to a server
+            // For now, we'll just show an alert
+            alert(`Thank you ${name}! Your message has been received. I'll get back to you at ${email} soon!`);
+            
+            // Reset the form
+            contactForm.reset();
+            
+            // In a real website, you would use something like:
+            // fetch('/api/contact', {
+            //     method: 'POST',
+            //     body: JSON.stringify({ name, email, message })
+            // })
+        });
+        
+        // ========== SCROLL REVEAL ANIMATION ==========
+        // Animate elements when they come into view
+        
+        // Function to check if element is in viewport
+        function isInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+        
+        // Add 'visible' class to elements when they enter viewport
+        function revealOnScroll() {
+            const elements = document.querySelectorAll('.skill-category, .project-card, .education-item, .stat-card');
+            
+            elements.forEach(element => {
+                if (isInViewport(element)) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+        
+        // Set initial state for animated elements
+        document.querySelectorAll('.skill-category, .project-card, .education-item, .stat-card').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
+        
+        // Listen for scroll events
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+        
+        // ========== TYPING EFFECT (Optional Enhancement) ==========
+        // Create a typing animation for the hero subtitle
+        const subtitle = document.querySelector('.hero-subtitle');
+        const text = subtitle.textContent;
+        subtitle.textContent = '';
+        
+        let i = 0;
+        function typeWriter() {
+            if (i < text.length) {
+                subtitle.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);  // Speed of typing
+            }
+        }
+        
+        // Start typing effect after page loads
+        window.addEventListener('load', () => {
+            setTimeout(typeWriter, 500);  // Delay before starting
+        });
+    </script>
+</body>
+</html>
